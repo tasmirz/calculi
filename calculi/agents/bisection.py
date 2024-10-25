@@ -1,4 +1,4 @@
-def bisection(f,a,b,tol=1e-4,nmax=100):
+def __bisection(f,a,b,tol=1e-4,nmax=100):
 	"""Solve quadratic equations with bisection method
 	Args:
 		f (method): function 
@@ -19,4 +19,5 @@ def bisection(f,a,b,tol=1e-4,nmax=100):
 		n=n+1
 	# throw err here
 	return c
-               
+def bisection(expr,tol,nnamx):
+	pass
