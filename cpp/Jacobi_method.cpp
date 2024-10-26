@@ -1,7 +1,12 @@
-#include<bits/stdc++.h>
-using namespace std;
+#include <boost/python.hpp>
+#include <vector>
+#include <cmath>
+#include <iomanip>
+#include <iostream>
 
-bool makeDiagonallyDominant(vector<vector<float>> &coeff, int n)
+//using namespace std;
+
+bool makeDiagonallyDominant(std::vector<std::vector<double>> &coeff, int n)
 {
     for (int i = 0; i < n; i++)
     {
@@ -19,7 +24,7 @@ bool makeDiagonallyDominant(vector<vector<float>> &coeff, int n)
             swap(coeff[i], coeff[maxRow]);
         }
 
-        float sum = 0;
+        double sum = 0;
         for (int j = 0; j < n; j++)
         {
             if (j != i) sum += fabs(coeff[i][j]);
@@ -30,9 +35,9 @@ bool makeDiagonallyDominant(vector<vector<float>> &coeff, int n)
     return true;
 }
 
-void jacobiIteration(vector<vector<float>> &coeff, vector<float> &x0, int n, float e)
+void jacobiIteration(std::vector<std::vector<double>> &coeff, std::vector<double> &x0, int n, double e)
 {
-    vector<float> x1(n), error(n);
+    std::vector<double> x1(n), error(n);
     int step = 1;
     bool flag;
 
@@ -71,15 +76,21 @@ void jacobiIteration(vector<vector<float>> &coeff, vector<float> &x0, int n, flo
     for (int i = 0; i < n; i++) cout << "x" << i + 1 << " = " << x1[i] << ", ";
 }
 
+BOOST_PYTHON_MODULE(jacobi_method)
+{
+    def("jacobiIteration", jacobiIteration);
+}
+
+/*
 int main()
 {
     int n;
-    float e;
+    double e;
     cout << "Enter number of variables: ";
     cin >> n;
 
-    vector<vector<float>> coeff(n, vector<float>(n + 1));
-    vector<float> x0(n, 0);
+    std::vector<std::vector<double>> coeff(n, std::vector<double>(n + 1));
+    std::vector<double> x0(n, 0);
 
     cout << "Enter coefficients of equations:" << endl;
     for (int i = 0; i < n; i++)
@@ -103,4 +114,4 @@ int main()
     }
     return 0;
 }
-
+*/

@@ -1,9 +1,12 @@
 #include<bits/stdc++.h>
 using namespace std;
+/*
 double f(double x)
 {
     return x*x-4*x-10;
 }
+*/
+
 double f1(double x)
 {
     return 2*x-4;

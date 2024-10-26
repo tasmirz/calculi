@@ -12,7 +12,7 @@ def rk4(f,c,start,end,h):
         k4 = f(x+h,y+h*k3,c)
         yn = y + h/6* (k1+2*k2+2*k3+k4)
         x+=h
-        y
+        y=yn
     return [retx,rety]
 
     

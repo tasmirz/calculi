@@ -1,18 +1,20 @@
 #include <iostream>
 #include <cmath>
+#include<vector>
+#include "library.hpp"
 using namespace std;
-
+/*
 double f(double x)
 {
     return x * x * x - 4 * x - 9;
 }
-
-void bisection(double a, double b, double tolerance)
+*/
+double bisection(vector<double> A,double a, double b, double tolerance)
 {
 
-    if (f(a) * f(b) >= 0)
+    if (f(A,a) * f(A,b) >= 0)
     {
-        cout << "Incorrect interval. The function must have opposite signs at a and b." << endl;
+        //cout << "Incorrect interval. The function must have opposite signs at a and b." << endl;
         return;
     }
 

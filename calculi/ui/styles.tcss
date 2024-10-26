@@ -1,0 +1,21 @@
+.spaced {
+    margin-top: 1;
+    margin-bottom: 1;
+}
+Space {
+    layout: grid;
+    grid-size: 2;
+    grid-columns: 1fr 2fr;
+    grid-rows: 55% 45%;
+}
+.colsp2 {
+    column-span: 2;
+}
+.inp Label  {
+    margin-top: 1;
+    margin-bottom: 1;
+    margin-left:2;
+}
+.inp Button {
+    width:100%
+}
