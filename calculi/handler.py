@@ -1,11 +1,11 @@
 # handler.py
 import subprocess
-from agents.bisection import bisection
-from agents.rk4 import rk4
-from agents.library import get_coff,sp
-from agents.gaussian_ellimination import gaussian_ellimination  
-from agents.gauss_jordan import gauss_jordan
-from agents.mat_inv import mat_inv
+from calculi.agents.bisection import bisection
+from calculi.agents.rk4 import rk4
+from calculi.agents.library import get_coff,sp
+from calculi.agents.gaussian_ellimination import gaussian_ellimination  
+from calculi.agents.gauss_jordan import gauss_jordan
+from calculi.agents.mat_inv import mat_inv
 import numpy as np
 DIR = "calculi/cpp_agents"
 def handle_method_selection(method_id, data_string,term,plt):
@@ -13,14 +13,10 @@ def handle_method_selection(method_id, data_string,term,plt):
     
     match method_id:
         case "jacobi":
-            st = ""
-            for i in get_coff(data_string):
-                st += str(i) + " "
+            st = data_string
             term.write(sp('calculi/cpp_agents/Jacobi_method.out', st))
         case "gauss_seidel":
-            st = ""
-            for i in get_coff(data_string):
-                st += str(i) + " "
+            st = data_string
             term.write(sp('calculi/cpp_agents/Gauss-Seidel_method.out', st))
         case "gauss_elimination":
             matrix = []
@@ -77,6 +73,6 @@ def handle_method_selection(method_id, data_string,term,plt):
                 row = list(map(float, line.split()))
                 matrix.append(row)
             matrix = np.array(matrix)
-            term.write(mat_inv(matrix),1e-10)
+            term.write(mat_inv(matrix,1e-10))
         #case _:
         #    raise ValueError(f"Unknown method ID: {method_id}")

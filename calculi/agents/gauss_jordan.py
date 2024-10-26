@@ -1,4 +1,4 @@
-from agents.library import unify,row_echelonU,row_echelon
+from calculi.agents.library import unify,row_echelonU,row_echelon
 def gauss_jordan(A):
     arr = []
     B = unify(row_echelonU(row_echelon(A)))

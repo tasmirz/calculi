@@ -14,5 +14,6 @@ $(TARGET)/%.out: $(SRC)/%.cpp
 
 clean:
 	rm -rf $(TARGET)/*.out
-
+run:
+	python3 calculi/__init__.py
 .PHONY: all clean

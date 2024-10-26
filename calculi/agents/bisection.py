@@ -1,6 +1,6 @@
 from sympy import Poly
 from sympy.utilities import lambdify
-import agents.library as library
+import calculi.agents.library as library
 magic_number = 0.1
 def __bisection(f,a,b,tol=1e-4,nmax=100):
 	"""Solve quadratic equations with bisection method

@@ -28,7 +28,7 @@ class Methods(Container):
                     yield RadioButton("Gauss elimination", id="gauss_elimination")
                     yield RadioButton("Gauss-Jordan elimination", id="gauss_jordan")
                     yield Label("For Edge Devices", classes="spaced")
-                    yield RadioButton("LU factorization", id="lu_factorization")
+                    yield RadioButton("LU4 factorization", id="lu_factorization")
             with TabPane("Non Linear"):
                 with RadioSet():
                     yield Label("Bracketing", classes="spaced")

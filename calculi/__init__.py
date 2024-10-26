@@ -2,9 +2,9 @@ from textual.app import App, ComposeResult
 from textual.widgets import Label, Header, Footer,RichLog,Static,Button,TextArea
 from textual.screen import Screen
 from textual.containers import Container,VerticalScroll,HorizontalScroll
-from Methods import Methods ,pr
+from calculi.Methods import Methods ,pr
 from textual_plotext import PlotextPlot
-import handler as handler
+import calculi.handler as handler
 from textual.logging import TextualHandler
 class Vambola(VerticalScroll,):
         def compose(self) -> ComposeResult:
@@ -42,6 +42,8 @@ class Calculi(App):
         self.push_screen(InterFace())
 
 
-if __name__ == "__main__":
+def __main__ ():
     app = Calculi()
     app.run()
+if __name__ == "__main__":
+    __main__()
