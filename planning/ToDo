@@ -1,0 +1,18 @@
+- [ ] Gaussian Ellimination
+    - [ ] if possible add soltion space in case of infinity solution
+- [ ] Gauss-Jordan
+- [ ] Bisection
+- [ ] Runge-Kutta
+- [ ] Matrix Inversion - related gauss-jordan
+
+
+Nafiz
+* LU
+* Jacobi
+* Gauss Seidel
+
+Moin
+Newton_Raphson.cpp
+false_position.cpp
+gauss_jordan elimination.cpp
+secant_method.cpp
