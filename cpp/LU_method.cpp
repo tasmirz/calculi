@@ -4,17 +4,17 @@ using namespace std;
 
 int main() {
 
-    double A[4][4], b[4];
-    cout << "Enter the elements of matrix A (4x4): " << endl;
-    for (int i = 0; i < 4; ++i) {
-        for (int j = 0; j < 4; ++j) {
-            cin >> A[i][j];
+    const int n = 4;
+    double A[n][n], b[n];
+    cout << "Enter the elements of the augmented matrix (" << n << "x" << n + 1 << "): " << endl;
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < n + 1; ++j) {
+            if (j == n) {
+                cin >> b[i];
+            } else {
+                cin >> A[i][j];
+            }
         }
-    }
-
-    cout << "Enter the elements of vector b (4x1): " << endl;
-    for (int i = 0; i < 4; ++i) {
-        cin >> b[i];
     }
     double L[4][4] = {0}, U[4][4] = {0};
     U[0][0] = A[0][0];

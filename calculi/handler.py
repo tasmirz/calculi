@@ -3,21 +3,44 @@ import subprocess
 from agents.bisection import bisection
 from agents.rk4 import rk4
 from agents.library import get_coff,sp
+from agents.gaussian_ellimination import gaussian_ellimination  
+from agents.gauss_jordan import gauss_jordan
+from agents.mat_inv import mat_inv
+import numpy as np
 DIR = "calculi/cpp_agents"
 def handle_method_selection(method_id, data_string,term,plt):
     data_lines = data_string.split('\n')
     
     match method_id:
-        #case "jacobi":
-        #    jacobi_method(data_lines)
-        #case "gauss_seidel":
-        #    gauss_seidel_method(data_lines)
-        #case "gauss_elimination":
-        #    gauss_elimination_method(data_lines)
-        #case "gauss_jordan":
-        #    gauss_jordan_method(data_lines)
-        #case "lu_factorization":
-        #    lu_factorization_method(data_lines)
+        case "jacobi":
+            st = ""
+            for i in get_coff(data_string):
+                st += str(i) + " "
+            term.write(sp('calculi/cpp_agents/Jacobi_method.out', st))
+        case "gauss_seidel":
+            st = ""
+            for i in get_coff(data_string):
+                st += str(i) + " "
+            term.write(sp('calculi/cpp_agents/Gauss-Seidel_method.out', st))
+        case "gauss_elimination":
+            matrix = []
+            for line in data_lines:
+                row = list(map(float, line.split()))
+                matrix.append(row)
+            matrix = np.array(matrix)
+            term.write(gaussian_ellimination (matrix))
+        case "gauss_jordan":
+            matrix = []
+            for line in data_lines:
+                row = list(map(float, line.split()))
+                matrix.append(row)
+            matrix = np.array(matrix)
+            term.write(gauss_jordan(matrix))
+        case "lu_factorization":
+            st = ""
+            for i in get_coff(data_string):
+                st += str(i) + " "
+            term.write(sp('calculi/cpp_agents/LU_method.out', st))
         case "bi_section":
             term.write(bisection(data_string))
             
@@ -48,7 +71,12 @@ def handle_method_selection(method_id, data_string,term,plt):
             plt.ylabel('y')
             plt.title('Runge-Kutta Method')
             plt.show()
-        #case "matrix_inversion":
-        #    matrix_inversion_method(data_lines)
+        case "matrix_inversion":
+            matrix = []
+            for line in data_lines:
+                row = list(map(float, line.split()))
+                matrix.append(row)
+            matrix = np.array(matrix)
+            term.write(mat_inv(matrix),1e-10)
         #case _:
         #    raise ValueError(f"Unknown method ID: {method_id}")
