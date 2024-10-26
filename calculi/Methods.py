@@ -62,6 +62,7 @@ class Methods(Container):
     def update_input_label(self, text):
         input_label = self.app.query_one("#top_label")
         self.app.selected = text
+
         match text:
             case "jacobi":
                 input_label.update("Jacobi iterative method selected")

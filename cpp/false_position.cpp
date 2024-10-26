@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include<vector>
-#include "library.hpp"
+#include "library.cpp"
 using namespace std;
 /*
 double f(double x)
@@ -9,7 +9,7 @@ double f(double x)
     return x * x * x - 4 * x - 9;
 }
 */
-double bisection(vector<double> A,double a, double b, double tolerance)
+void bisection(vector<double> A,double a, double b, double tolerance)
 {
 
     if (f(A,a) * f(A,b) >= 0)
@@ -21,15 +21,15 @@ double bisection(vector<double> A,double a, double b, double tolerance)
     double c;
     while ((b - a) >= tolerance)
     {
-         c = (a*f(b)-b*f(a))/(f(b)-f(a));
+         c = (a*f(A,b)-b*f(A,a))/(f(A,b)-f(A,a));
 
-        if (fabs(f(c)) < tolerance)
+        if (fabs(f(A,c)) < tolerance)
         {
-            cout << "The root is approximately: " << c << endl;
+            cout << c <<" ";
             return;
         }
 
-        if (f(c) * f(a) < 0)
+        if (f(A,c) * f(A,a) < 0)
         {
             b = c;
         }
@@ -38,19 +38,32 @@ double bisection(vector<double> A,double a, double b, double tolerance)
             a = c;
         }
     }
-
-    c = (a*f(b)-b*f(a))/(f(b)-f(a));
-    cout << "The root is approximately: " << c << endl;
 }
 
 int main()
 {
-    double a, b, tolerance = 0.00001;
+    vector<double> coff;
+    double t;
+     while (cin>>t) {
+        coff.push_back(t);
+    }
+    pair<int,int>p= find_bounds(coff) ;
+    double tolerance = 0.00001;
+    double a = p.first;
+    double b = p.second;
+    double magic_number = 0.1; 
 
-    cout << "Enter the values for a and b: ";
-    cin >> a >> b;
-
-    bisection(a, b, tolerance);
+    while (a < b) {
+        if (f(coff, a) == 0.0) {
+            cout<<a<<" ";
+            a += magic_number;
+            continue;
+        }
+        if (f(coff, a) * f(coff, a + magic_number) < 0) {
+            bisection(coff, a, a + magic_number, tolerance);
+        }
+        a += magic_number;
+    }
 
     return 0;
 }

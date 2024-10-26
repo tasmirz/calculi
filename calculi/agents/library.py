@@ -68,3 +68,7 @@ def unify(I):
         #if A[i][i] == 0.0: raise Exception("No particular solution")
         A[i]/=A[i][i];
     return A
+def find_bounds(coefficients):
+	a_n = coefficients[0]
+	M = 1 + max(abs(coeff / a_n) for coeff in coefficients[1:])
+	return (-M+1, M+1)

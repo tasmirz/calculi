@@ -1,10 +1,9 @@
-#include <boost/python.hpp>
 #include <vector>
 #include <cmath>
 #include <iomanip>
 #include <iostream>
 
-//using namespace std;
+using namespace std;
 
 bool makeDiagonallyDominant(std::vector<std::vector<double>> &coeff, int n)
 {
@@ -76,12 +75,11 @@ void jacobiIteration(std::vector<std::vector<double>> &coeff, std::vector<double
     for (int i = 0; i < n; i++) cout << "x" << i + 1 << " = " << x1[i] << ", ";
 }
 
-BOOST_PYTHON_MODULE(jacobi_method)
-{
-    def("jacobiIteration", jacobiIteration);
-}
+//BOOST_PYTHON_MODULE(jacobi_method)
+//{
+//    def("jacobiIteration", jacobiIteration);
+//}
 
-/*
 int main()
 {
     int n;
@@ -114,4 +112,3 @@ int main()
     }
     return 0;
 }
-*/
