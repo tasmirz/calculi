@@ -2,7 +2,20 @@ from textual.app import App, ComposeResult
 from textual.widgets import Label, RadioButton, RadioSet, Input, TabbedContent, TabPane
 from textual_slider import Slider
 from textual.containers import Horizontal, Vertical, Container
+from textual import on
+def pr(x):
+        import sys
 
+        orig_stdout = sys.stdout
+        f = open('out.txt', 'a')
+        sys.stdout = f
+
+        print(x)
+
+        sys.stdout = orig_stdout
+        f.close()
+        #selected_label = selected_radio_button.label
+        #self.update_input_label(selected_label)
 class Methods(Container):
     def compose(self):
         with TabbedContent():
@@ -32,16 +45,45 @@ class Methods(Container):
                 with RadioSet():
                     yield Label("Matrix Inversion", classes="spaced")
                     yield RadioButton("Matrix Inversion", id="matrix_inversion")
+    def on_radio_set_changed(self, event):
+        #import sys
 
-    def on_mount(self):
-        for radio_button in self.query(RadioButton):
-            radio_button.on_click(self.on_radio_button_click)
+        #orig_stdout = sys.stdout
+        #f = open('out.txt', 'w')
+        #sys.stdout = f
 
-    def on_radio_button_click(self, event):
-        selected_radio_button = event.sender
-        selected_label = selected_radio_button.label
-        self.update_input_label(selected_label)
+        self.update_input_label(event.pressed.id)
+
+        #sys.stdout = orig_stdout
+        #f.close()
+        #selected_label = selected_radio_button.label
+        #self.update_input_label(selected_label)
 
     def update_input_label(self, text):
-        input_label = self.app.query_one(Label, id="top_label")
-        input_label.update(text)
+        input_label = self.app.query_one("#top_label")
+        self.app.selected = text
+        match text:
+            case "jacobi":
+                input_label.update("Jacobi iterative method selected")
+            case "gauss_seidel":
+                input_label.update("Gauss-Seidel iterative method selected")
+            case "gauss_elimination":
+                input_label.update("Gauss elimination selected")
+            case "gauss_jordan":
+                input_label.update("Gauss-Jordan elimination selected")
+            case "lu_factorization":
+                input_label.update("LU factorization selected")
+            case "bi_section":
+                input_label.update("Bi-section method selected")
+            case "false_position":
+                input_label.update("False position method selected")
+            case "secant":
+                input_label.update("Secant method selected")
+            case "newton_raphson":
+                input_label.update("Newton-Raphson method selected")
+            case "runge_kutta":
+                input_label.update("Runge-Kutta method selected")
+            case "matrix_inversion":
+                input_label.update("Matrix Inversion selected")
+            case _:
+                input_label.update("Unknown method selected")

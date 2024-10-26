@@ -16,6 +16,6 @@ Space {
     margin-bottom: 1;
     margin-left:2;
 }
-.inp Button {
+#solve {
     width:100%
 }
