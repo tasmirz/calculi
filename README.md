@@ -9,7 +9,7 @@ Install all the requirements
 ```bash
 pip install -r requirements.txt
 ```
-`         `***Alogrithms***
+`***Alogrithms***
 
 ***Algorithm for Newton Raphson Method***
 
