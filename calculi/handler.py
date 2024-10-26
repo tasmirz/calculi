@@ -20,8 +20,10 @@ def handle_method_selection(method_id, data_string,term,plt):
         case "bi_section":
             term.write(bisection(data_string))
         case "false_position":
-            term.write("hi")
-            term.write(sp(DIR+ '/false_position.out',get_coff(data_string)).join(' '))
+            st =""
+            for i in get_coff(data_string):
+                st+=str(i)+" "
+            term.write(sp('calculi/cpp_agents/false_position.out',st))
         #case "secant":
         #    secant_method(data_lines)
         #case "newton_raphson":

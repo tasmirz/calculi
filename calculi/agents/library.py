@@ -84,7 +84,7 @@ def sp (name,input):
         stderr=subprocess.PIPE,
         text=True
     )
-    output, error = process.communicate(input="Hello World\n")
+    output, error = process.communicate(input)
     return output
 def get_coff(expr):
     return Poly(expr).all_coeffs()
