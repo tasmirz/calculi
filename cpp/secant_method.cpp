@@ -1,15 +1,21 @@
+
 #include<bits/stdc++.h>
 using namespace std;
+#include "library.cxx"
+/*
 double f(double x)
 {
     return x*x-4*x-10;
 }
+*/
+
 double f1(double x)
 {
     return 2*x-4;
 }
 void secant()
 {
+    /*
     {
     double x1,x2,x3;
     cout<< " give x1, x2\n" ;
@@ -18,8 +24,8 @@ void secant()
     {
 
 
-    x3=x2-(f(x2)*(x2-x1))/(f(x2)-f(x1));
-    if(f(x3)==0)
+    x3=x2-(f(A,x2)*(x2-x1))/(f(A,x2)-f(x1));
+    if(f(A,x3)==0)
     {
         cout<< "in secant method ans is = "<< x3<<endl;
         return ;
@@ -33,6 +39,7 @@ void secant()
 cout<<"in secant method ans is = "<< x3<<endl;
 
     }
+    */
 }
 
 /*void newton_raphson()
