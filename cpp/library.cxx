@@ -1,5 +1,6 @@
 #include <vector>
 #include <algorithm>
+#include<cmath>
 double f(std::vector<double> A,double x) {
     double sum=A[0];
     for (int i=1;i<A.size();i++) {
@@ -14,7 +15,7 @@ std::pair<double, double> find_bounds(const std::vector<double>& coefficients) {
     double a_n = coefficients[0];
     double M = 1;
     for (size_t i = 1; i < coefficients.size(); ++i) {
-        M = std::max(M, std::ceil(std::abs(coefficients[i] / a_n)));
+        M = std::max(M, ceil(std::abs(coefficients[i] / a_n)));
     }
     return std::make_pair(-M + 1, M + 1);
 }

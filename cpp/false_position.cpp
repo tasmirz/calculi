@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include<vector>
-#include "library.cpp"
+#include "library.cxx"
 using namespace std;
 /*
 double f(double x)

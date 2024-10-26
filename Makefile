@@ -4,15 +4,15 @@ SRC := cpp
 TARGET := calculi/cpp_agents
 
 SOURCES := $(wildcard $(SRC)/*.cpp)
-OBJECTS := $(patsubst $(SRC)/%.cpp, $(TARGET)/%.o, $(SOURCES))
+OBJECTS := $(patsubst $(SRC)/%.cpp, $(TARGET)/%.out, $(SOURCES))
 
 all: $(OBJECTS)
 
-$(TARGET)/%.o: $(SRC)/%.cpp
+$(TARGET)/%.out: $(SRC)/%.cpp
 	@mkdir -p $(TARGET)
-	$(CXX) -c $< -o $@
+	$(CXX) $< -o $@
 
 clean:
-	rm -rf $(TARGET)/*.o
+	rm -rf $(TARGET)/*.out
 
 .PHONY: all clean

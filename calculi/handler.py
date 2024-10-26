@@ -1,6 +1,8 @@
 # handler.py
-
+import subprocess
 from agents.bisection import bisection
+from agents.library import get_coff,sp
+DIR = "calculi/cpp_agents"
 def handle_method_selection(method_id, data_string,term,plt):
     data_lines = data_string.split('\n')
     
@@ -17,8 +19,9 @@ def handle_method_selection(method_id, data_string,term,plt):
         #    lu_factorization_method(data_lines)
         case "bi_section":
             term.write(bisection(data_string))
-        #case "false_position":
-        #    false_position_method(data_lines)
+        case "false_position":
+            term.write("hi")
+            term.write(sp(DIR+ '/false_position.out',get_coff(data_string)).join(' '))
         #case "secant":
         #    secant_method(data_lines)
         #case "newton_raphson":

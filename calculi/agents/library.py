@@ -1,5 +1,8 @@
 import numpy as np
 import math
+from sympy import Poly
+from sympy.utilities import lambdify
+import subprocess
 def to_np(A):
     return np.array(A)
 def row_abs_sum(A,i):
@@ -72,3 +75,16 @@ def find_bounds(coefficients):
 	a_n = coefficients[0]
 	M = 1 + max(abs(coeff / a_n) for coeff in coefficients[1:])
 	return (-M+1, M+1)
+
+def sp (name,input):
+    process = subprocess.Popen(
+        [name],
+        stdin=subprocess.PIPE,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True
+    )
+    output, error = process.communicate(input="Hello World\n")
+    return output
+def get_coff(expr):
+    return Poly(expr).all_coeffs()
