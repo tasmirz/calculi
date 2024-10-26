@@ -1,63 +1,44 @@
-
 #include<bits/stdc++.h>
 using namespace std;
 #include "library.cxx"
-/*
-double f(double x)
-{
-    return x*x-4*x-10;
-}
-*/
-
-double f1(double x)
-{
-    return 2*x-4;
-}
-void secant()
-{
-    /*
-    {
-    double x1,x2,x3;
-    cout<< " give x1, x2\n" ;
-    cin>>x1>>x2;
-    for(int i=0;i<10;i++)
-    {
-
-
-    x3=x2-(f(A,x2)*(x2-x1))/(f(A,x2)-f(x1));
-    if(f(A,x3)==0)
-    {
-        cout<< "in secant method ans is = "<< x3<<endl;
-        return ;
+vector<double> roots;
+double f_(const vector<double>& A, double x) {
+    double res = f(A, x);
+    for (double root : roots) {
+        res /= (x - root);
     }
-    else
-{
-    x1=x2;
-    x2=x3;
+    return res;
 }
-    }
-cout<<"in secant method ans is = "<< x3<<endl;
-
-    }
-    */
-}
-
-/*void newton_raphson()
+void secant(const vector<double> coefficients,int l)
 {
-    double x0=0,x1;
-for(int i=0;i<10;i++){
-    x1=x0-(f(x0)/f1(x0));
-    if(f(x1)==0)
+    if (l==0)  return;
+    double x2, x3;
+    pair<int,int> p = find_bounds(coefficients);
+    static double x1 = p.first;
+    x2 = p.second;
+    for (int i = 0; i < 100; i++)
     {
-      cout<<"in newton raphson method ans is = "<< x1<<endl;
-      return;
+        x3 = x2 - (f_(coefficients, x2) * (x2 - x1)) / (f_(coefficients, x2) - f_(coefficients, x1));
+        if (fabs(f_(coefficients, x3)) < 0.00001)
+        {
+            roots.push_back(x3);
+            cout << x3 << " ";
+            secant(coefficients,l-1);
+        }
+        else
+        {
+            x1 = x2;
+            x2 = x3;
+        }
     }
-    x0=x1;
 }
- cout<<"in newton raphson method ans is = "<< x1<<endl;
-}*/
+
 int main()
 {
-   secant();
-   //newton_raphson();
+    vector<double> coefficients;
+    double t;
+    while (cin >> t) {
+        coefficients.push_back(t);
+    }
+    secant(coefficients,coefficients.size()-1);
 }

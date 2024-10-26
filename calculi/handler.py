@@ -1,6 +1,7 @@
 # handler.py
 import subprocess
 from agents.bisection import bisection
+from agents.rk4 import rk4
 from agents.library import get_coff,sp
 DIR = "calculi/cpp_agents"
 def handle_method_selection(method_id, data_string,term,plt):
@@ -19,17 +20,34 @@ def handle_method_selection(method_id, data_string,term,plt):
         #    lu_factorization_method(data_lines)
         case "bi_section":
             term.write(bisection(data_string))
+            
         case "false_position":
             st =""
             for i in get_coff(data_string):
                 st+=str(i)+" "
             term.write(sp('calculi/cpp_agents/false_position.out',st))
-        #case "secant":
-        #    secant_method(data_lines)
-        #case "newton_raphson":
-        #    newton_raphson_method(data_lines)
-        #case "runge_kutta":
-        #    runge_kutta_method(data_lines)
+        case "secant":
+            st =""
+            for i in get_coff(data_string):
+                st+=str(i)+" "
+            term.write(sp('calculi/cpp_agents/secant_method.out',st))
+        case "newton_raphson":
+            st =""
+            for i in get_coff(data_string):
+                st+=str(i)+" "
+            term.write(sp('calculi/cpp_agents/Newton_Raphson.out',st))
+        case "runge_kutta":
+            DD = data_lines[0]
+            cc = float(data_lines[1])
+            
+            x,y = rk4(DD,cc)
+            for i in range(len(x)):
+                term.write(f"x: {x[i]}, y: {y[i]}\n")
+            plt.scatter(x,y)
+            plt.xlabel('x')
+            plt.ylabel('y')
+            plt.title('Runge-Kutta Method')
+            plt.show()
         #case "matrix_inversion":
         #    matrix_inversion_method(data_lines)
         #case _:

@@ -1,13 +1,6 @@
 #include<bits/stdc++.h>
+#include "library.cxx"
 using namespace std;
-double f(double x)
-{
-    return x*x-4*x-10;
-}
-double f1(double x)
-{
-    return 2*x-4;
-}
 /*void secant()
 {
     {
@@ -18,8 +11,8 @@ double f1(double x)
     {
 
 
-    x3=x2-(f(x2)*(x2-x1))/(f(x2)-f(x1));
-    if(f(x3)==0)
+    x3=x2-(f_(x2)*(x2-x1))/(f_(x2)-f_(x1));
+    if_(f_(x3)==0)
     {
         cout<< "in secant method ans is = "<< x3<<endl;
         return ;
@@ -34,24 +27,45 @@ cout<<"in secant method ans is = "<< x3<<endl;
 
     }
 }*/
-
-void newton_raphson()
-{
-    double x0=0,x1;
-for(int i=0;i<10;i++){
-    x1=x0-(f(x0)/f1(x0));
-    if(f(x1)==0)
-    {
-      cout<<"in newton raphson method ans is = "<< x1<<endl;
-      return;
+vector <double> roots;
+double f_ (vector<double>A,double x) {
+    double res= f(A,x);
+    for (int i=0;i<roots.size();i++) {
+        res/=x-roots[i];
     }
-    x0=x1;
+    return res;
+} 
+double fp_ (vector<double>A,double x,double h=0.00001) {
+     return (f_(A,x+h)-f_(A,x))/h;
 }
- cout<<"in newton raphson method ans is = "<< x1<<endl;
+void newton_raphson(const vector<double>& coefficients, double tolerance,int l)
+{   
+    if (l==0) {
+        return;
+    }
+    pair<double, double> bounds = find_bounds(coefficients);
+    static double x0 = bounds.first;
+    double x1;
+    for (int i = 0; i < 10; i++) {
+        x1 = x0 - (f_(coefficients, x0) / fp_(coefficients, x0));
+        if (fabs(f_(coefficients, x1)) < tolerance) {
+            cout << x1 << " ";
+            roots.push_back(x1);
+            return newton_raphson(coefficients, tolerance,l-1);
+        }
+        x0 = x1;
+    }
+
 }
+
 int main()
 {
-   //secant();
-   newton_raphson();
+    vector<double> coefficients;
+    double t;
+    while (cin >> t) {
+        coefficients.push_back(t);
+    }
+    double tolerance = 0.00001;
+    newton_raphson(coefficients, tolerance,coefficients.size()-1);
 }
 

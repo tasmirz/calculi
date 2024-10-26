@@ -16,7 +16,7 @@ class Vambola(VerticalScroll,):
         def on_button_pressed(self, event):
             text_log = self.query_one(RichLog)
             #text_log.write("Button clicked")
-            handler.handle_method_selection(self.app.selected,self.query_one(TextArea).text,text_log,self.app.query_one(PlotextPlot))
+            handler.handle_method_selection(self.app.selected,self.query_one(TextArea).text,text_log,self.app.query_one(PlotextPlot).plt)
             #pr(self.query_one(TextArea).text)
             
 
