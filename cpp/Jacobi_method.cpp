@@ -5,7 +5,7 @@
 
 using namespace std;
 
-bool makeDiagonallyDominant(std::vector<std::vector<double>> &coeff, int n)
+bool makeDiagonallyDominant(vector<vector<double>> &coeff, int n)
 {
     for (int i = 0; i < n; i++)
     {
@@ -34,9 +34,9 @@ bool makeDiagonallyDominant(std::vector<std::vector<double>> &coeff, int n)
     return true;
 }
 
-void jacobiIteration(std::vector<std::vector<double>> &coeff, std::vector<double> &x0, int n, double e)
+void jacobiIteration(vector<vector<double>> &coeff, vector<double> &x0, int n, double e)
 {
-    std::vector<double> x1(n), error(n);
+    vector<double> x1(n), error(n);
     int step = 1;
     bool flag;
 
@@ -83,24 +83,24 @@ void jacobiIteration(std::vector<std::vector<double>> &coeff, std::vector<double
 int main()
 {
     int n;
-    double e;
-    cout << "Enter number of variables: ";
-    cin >> n;
+    double e = 1e-4;
 
-    std::vector<std::vector<double>> coeff(n, std::vector<double>(n + 1));
-    std::vector<double> x0(n, 0);
+    vector<vector<double>> coeff;
 
-    cout << "Enter coefficients of equations:" << endl;
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j <= n; j++)
-        {
-            cin >> coeff[i][j];
+    string line;
+    while (getline(cin, line)) {
+        istringstream iss(line);
+        vector<double> row;
+        double value;
+        while (iss >> value) {
+            row.push_back(value);
+        }
+        if (!row.empty()) {
+            coeff.push_back(row);
         }
     }
-
-    cout << "Enter tolerable error: ";
-    cin >> e;
+    n = coeff.size();
+    vector<double> x0(n, 0);
 
     if (makeDiagonallyDominant(coeff, n))
     {

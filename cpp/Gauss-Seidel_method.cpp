@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-bool makeDiagonallyDominant(vector<vector<float>> &coeff, int n) {
+bool makeDiagonallyDominant(vector<vector<double>> &coeff, int n) {
     for (int i = 0; i < n; i++) {
         int maxRow = i;
         for (int j = i + 1; j < n; j++) {
@@ -12,7 +12,7 @@ bool makeDiagonallyDominant(vector<vector<float>> &coeff, int n) {
         if (maxRow != i) {
             swap(coeff[i], coeff[maxRow]);
         }
-        float sum = 0;
+        double sum = 0;
         for (int j = 0; j < n; j++) {
             if (j != i) sum += fabs(coeff[i][j]);
         }
@@ -21,8 +21,8 @@ bool makeDiagonallyDominant(vector<vector<float>> &coeff, int n) {
     return true;
 }
 
-void gaussSeidelIteration(vector<vector<float>> &coeff, vector<float> &x, int n, float e) {
-    vector<float> error(n);
+void gaussSeidelIteration(vector<vector<double>> &coeff, vector<double> &x, int n, double e) {
+    vector<double> error(n);
     int step = 1;
     bool flag;
 
@@ -34,7 +34,7 @@ void gaussSeidelIteration(vector<vector<float>> &coeff, vector<float> &x, int n,
     do {
         flag = true;
         for (int i = 0; i < n; i++) {
-            float old_xi = x[i];
+            double old_xi = x[i];
             x[i] = coeff[i][n];
             for (int j = 0; j < n; j++) {
                 if (i != j) x[i] -= coeff[i][j] * x[j];
@@ -58,27 +58,30 @@ void gaussSeidelIteration(vector<vector<float>> &coeff, vector<float> &x, int n,
 
 int main() {
     int n;
-    float e;
-    cout << "Enter number of variables: ";
-    cin >> n;
+    double e=1e-4;
 
-    vector<vector<float>> coeff(n, vector<float>(n + 1));
-    vector<float> x(n, 0);
+    vector<vector<double>> coeff;
 
-    cout << "Enter coefficients of equations:" << endl;
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j <= n; j++) {
-            cin >> coeff[i][j];
+    string line;
+    while (getline(cin, line)) {
+        istringstream iss(line);
+        vector<double> row;
+        double value;
+        while (iss >> value) {
+            row.push_back(value);
+        }
+        if (!row.empty()) {
+            coeff.push_back(row);
         }
     }
+    n = coeff.size();
+    vector<double> x(n, 0);
 
-    cout << "Enter tolerable error: ";
-    cin >> e;
 
     if (makeDiagonallyDominant(coeff, n)) {
         gaussSeidelIteration(coeff, x, n, e);
     } else {
-        cout << "The system could not be made diagonally dominant and may not converge using the Gauss-Seidel method.";
+        cout << "Failed to make diagoanlly dominant" << endl;
     }
     return 0;
 }
