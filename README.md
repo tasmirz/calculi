@@ -21,6 +21,7 @@ make build
 ```bash
 python -m calculi
 ```
+<img src="planning/Screenshot 2024-10-27 031457.png"/>
 ## Algorithms
 
 ### Newton Raphson Method
