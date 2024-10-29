@@ -19,5 +19,6 @@ def __rk4(f,c,start,end,h):
     return [retx,rety]
 
 def rk4(expr,cc):
-    f = eval(f"lambda x, y: {expr}")
+    #f = eval(f"lambda x, y: {expr}")
+    f = lambdify(('x', 'y'), expr)
     return __rk4(f,cc,0,10,.1)
