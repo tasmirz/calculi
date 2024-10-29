@@ -1,4 +1,5 @@
 from sympy import Poly
+from math import *
 from sympy.utilities import lambdify
 def __rk4(f,c,start,end,h):
     x= start
